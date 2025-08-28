@@ -1,30 +1,56 @@
-import components.simplewriter.SimpleWriter;
-import components.simplewriter.SimpleWriter1L;
+import components.sequence.Sequence;
 
 /**
- * Simple HelloWorld program (clear of Checkstyle and SpotBugs warnings).
+ * Implements method to smooth a {@code Sequence<Integer>}.
  *
- * @author P. Bucci
+ * @author Brayden May
+ *
  */
 public final class SequenceSmooth {
 
     /**
-     * No argument constructor--private to prevent instantiation.
+     * Private constructor so this utility class cannot be instantiated.
      */
     private SequenceSmooth() {
-        // no code needed here
     }
 
     /**
-     * Main method.
+     * Smooths a given {@code Sequence<Integer>}.
      *
-     * @param args
-     *            the command line arguments; unused here
+     * @param s1
+     *            the sequence to smooth
+     * @param s2
+     *            the resulting sequence
+     * @replaces s2
+     * @requires |s1| >= 1
+     * @ensures <pre>
+     * |s2| = |s1| - 1  and
+     *  for all i, j: integer, a, b: string of integer
+     *      where (s1 = a * <i> * <j> * b)
+     *    (there exists c, d: string of integer
+     *       (|c| = |a|  and
+     *        s2 = c * <(i+j)/2> * d))
+     * </pre>
      */
-    public static void main(String[] args) {
-        SimpleWriter out = new SimpleWriter1L();
-        out.println("Hello World!");
-        out.close();
+    public static void smooth(Sequence<Integer> s1, Sequence<Integer> s2) {
+        assert s1 != null : "Violation of: s1 is not null";
+        assert s2 != null : "Violation of: s2 is not null";
+        assert s1 != s2 : "Violation of: s1 is not s2";
+        assert s1.length() >= 1 : "Violation of: |s1| >= 1";
+
+        while (s2.length() > 0) {
+            s2.remove(0);
+        }
+
+        for (int i = 0; i < s1.length() - 1; i++) {
+            int tempA = s1.entry(i);
+            int tempB = s1.entry(i + 1);
+
+            int average = (tempA + tempB) / 2;
+
+            s2.add(i, average);
+        }
+
     }
 
 }
