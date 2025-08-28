@@ -70,17 +70,18 @@ public final class SequenceSmoothTest {
     }
 
     /**
-     * Test smooth with s1 = <2, 4, 6> and s2 = <>.
+     * Test smooth with s1 = <1, 2, 3> and s2 = <>. Test numbers that are not
+     * evenly divisible.
      */
     @Test
     public void test3() {
         /*
          * Set up variables and call method under test
          */
-        Sequence<Integer> seq1 = this.createFromArgs(2, 4, 6);
-        Sequence<Integer> expectedSeq1 = this.createFromArgs(2, 4, 6);
-        Sequence<Integer> seq2 = this.createFromArgs(-5, 12);
-        Sequence<Integer> expectedSeq2 = this.createFromArgs(3, 5);
+        Sequence<Integer> seq1 = this.createFromArgs(1, 2, 3);
+        Sequence<Integer> expectedSeq1 = this.createFromArgs(1, 2, 3);
+        Sequence<Integer> seq2 = this.createFromArgs();
+        Sequence<Integer> expectedSeq2 = this.createFromArgs(1, 2);
         SequenceSmooth.smooth(seq1, seq2);
         /*
          * Assert that values of variables match expectations
@@ -99,7 +100,7 @@ public final class SequenceSmoothTest {
          */
         Sequence<Integer> seq1 = this.createFromArgs(2, 4, 6);
         Sequence<Integer> expectedSeq1 = this.createFromArgs(2, 4, 6);
-        Sequence<Integer> seq2 = this.createFromArgs(-5, 12);
+        Sequence<Integer> seq2 = this.createFromArgs();
         Sequence<Integer> expectedSeq2 = this.createFromArgs(3, 5);
         SequenceSmooth.smooth(seq1, seq2);
         /*
@@ -109,4 +110,43 @@ public final class SequenceSmoothTest {
         assertEquals(expectedSeq2, seq2);
     }
 
+    /**
+     * Test smooth with s1 = <-2, -4, -6> and s2 = <>.
+     */
+    @Test
+    public void test5() {
+        /*
+         * Set up variables and call method under test
+         */
+        Sequence<Integer> seq1 = this.createFromArgs(-2, -4, -6);
+        Sequence<Integer> expectedSeq1 = this.createFromArgs(-2, -4, -6);
+        Sequence<Integer> seq2 = this.createFromArgs(-5, 12);
+        Sequence<Integer> expectedSeq2 = this.createFromArgs(-3, -5);
+        SequenceSmooth.smooth(seq1, seq2);
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(expectedSeq1, seq1);
+        assertEquals(expectedSeq2, seq2);
+    }
+
+    /**
+     * Test smooth with s1 = <7, 7, 7, 7> and s2 = <-5, 12>.
+     */
+    @Test
+    public void test6() {
+        /*
+         * Set up variables and call method under test
+         */
+        Sequence<Integer> seq1 = this.createFromArgs(7, 7, 7, 7);
+        Sequence<Integer> expectedSeq1 = this.createFromArgs(7, 7, 7, 7);
+        Sequence<Integer> seq2 = this.createFromArgs(-5, 12);
+        Sequence<Integer> expectedSeq2 = this.createFromArgs(7, 7, 7);
+        SequenceSmooth.smooth(seq1, seq2);
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(expectedSeq1, seq1);
+        assertEquals(expectedSeq2, seq2);
+    }
 }
