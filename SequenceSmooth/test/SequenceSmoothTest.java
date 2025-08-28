@@ -8,7 +8,7 @@ import components.sequence.Sequence1L;
 /**
  * Sample JUnit test fixture for SequenceSmooth.
  *
- * @author Put your name here
+ * @author Brayden May
  *
  */
 public final class SequenceSmoothTest {
@@ -61,6 +61,46 @@ public final class SequenceSmoothTest {
         Sequence<Integer> expectedSeq1 = this.createFromArgs(7);
         Sequence<Integer> seq2 = this.createFromArgs(13, 17, 11);
         Sequence<Integer> expectedSeq2 = this.createFromArgs();
+        SequenceSmooth.smooth(seq1, seq2);
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(expectedSeq1, seq1);
+        assertEquals(expectedSeq2, seq2);
+    }
+
+    /**
+     * Test smooth with s1 = <2, 4, 6> and s2 = <>.
+     */
+    @Test
+    public void test3() {
+        /*
+         * Set up variables and call method under test
+         */
+        Sequence<Integer> seq1 = this.createFromArgs(2, 4, 6);
+        Sequence<Integer> expectedSeq1 = this.createFromArgs(2, 4, 6);
+        Sequence<Integer> seq2 = this.createFromArgs(-5, 12);
+        Sequence<Integer> expectedSeq2 = this.createFromArgs(3, 5);
+        SequenceSmooth.smooth(seq1, seq2);
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(expectedSeq1, seq1);
+        assertEquals(expectedSeq2, seq2);
+    }
+
+    /**
+     * Test smooth with s1 = <2, 4, 6> and s2 = <>.
+     */
+    @Test
+    public void test4() {
+        /*
+         * Set up variables and call method under test
+         */
+        Sequence<Integer> seq1 = this.createFromArgs(2, 4, 6);
+        Sequence<Integer> expectedSeq1 = this.createFromArgs(2, 4, 6);
+        Sequence<Integer> seq2 = this.createFromArgs(-5, 12);
+        Sequence<Integer> expectedSeq2 = this.createFromArgs(3, 5);
         SequenceSmooth.smooth(seq1, seq2);
         /*
          * Assert that values of variables match expectations
