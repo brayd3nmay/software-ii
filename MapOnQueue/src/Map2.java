@@ -144,8 +144,7 @@ public class Map2<K, V> extends MapSecondary<K, V> {
         assert value != null : "Violation of: value is not null";
         assert !this.hasKey(key) : "Violation of: key is not in DOMAIN(this)";
 
-        // TODO - fill in body
-
+        this.pairsQueue.enqueue(new SimplePair<>(key, value));
     }
 
     @Override
