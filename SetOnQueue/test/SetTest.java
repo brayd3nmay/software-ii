@@ -67,7 +67,6 @@ public abstract class SetTest {
         return set;
     }
 
-    // TODO - add test cases for constructor, add, remove, removeAny, contains, and size
     /*
      * Test cases for constructor
      */
