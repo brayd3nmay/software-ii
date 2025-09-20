@@ -56,8 +56,28 @@ public class Map2<K, V> extends MapSecondary<K, V> {
         assert q != null : "Violation of: q is not null";
         assert key != null : "Violation of: key is not null";
 
-        // TODO - fill in body
+        Queue<Pair<K, V>> helper = new Queue1L<>();
+        Pair<K, V> match = null;
 
+        boolean found = false;
+        int length = q.length();
+
+        for (int i = 0; i < length; i++) {
+            Pair<K, V> temp = q.dequeue();
+            if (!found && temp.key().equals(key)) {
+                found = true;
+                match = temp;
+            } else {
+                helper.enqueue(temp);
+            }
+        }
+
+        if (found) {
+            q.enqueue(match);
+        }
+        while (helper.length() > 0) {
+            q.enqueue(helper.dequeue());
+        }
     }
 
     /**
@@ -102,8 +122,8 @@ public class Map2<K, V> extends MapSecondary<K, V> {
     public final void transferFrom(Map<K, V> source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof Map2<?, ?> : ""
-                + "Violation of: source is of dynamic type Map2<?,?>";
+        assert source instanceof Map2<?, ?>
+                : "" + "Violation of: source is of dynamic type Map2<?,?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type Map2<?,?>, and
