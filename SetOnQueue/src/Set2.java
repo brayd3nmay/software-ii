@@ -145,7 +145,7 @@ public class Set2<T> extends SetSecondary<T> {
     @Override
     public final T removeAny() {
         assert this.size() > 0 : "Violation of: |this| > 0";
-        int random = (int) Math.random() * this.elements.length();
+        int random = (int) (Math.random() * this.elements.length());
 
         T randomElement = this.elements.dequeue();
         for (int i = 0; i < random; i++) {
