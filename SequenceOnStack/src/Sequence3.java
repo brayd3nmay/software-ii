@@ -52,16 +52,25 @@ public class Sequence3<T> extends SequenceSecondary<T> {
      * |leftStack| = newLeftLength}
      * </pre>
      */
-    private static <T> void setLengthOfLeftStack(Stack<T> leftStack,
-            Stack<T> rightStack, int newLeftLength) {
+    private static <T> void setLengthOfLeftStack(Stack<T> leftStack, Stack<T> rightStack,
+            int newLeftLength) {
         assert leftStack != null : "Violation of: rightStack is not null";
         assert leftStack != null : "Violation of: rightStack is not null";
         assert 0 <= newLeftLength : "Violation of: 0 <= newLeftLength";
-        assert newLeftLength <= leftStack.length() + rightStack.length() : ""
-                + "Violation of: newLeftLength <= |leftStack| + |rightStack|";
+        assert newLeftLength <= leftStack.length() + rightStack.length()
+                : "" + "Violation of: newLeftLength <= |leftStack| + |rightStack|";
 
-        // TODO - fill in body
+        while (leftStack.length() > newLeftLength) {
+            T temp = leftStack.pop();
 
+            rightStack.push(temp);
+        }
+
+        while (leftStack.length() < newLeftLength) {
+            T temp = rightStack.pop();
+
+            leftStack.push(temp);
+        }
     }
 
     /**
@@ -107,8 +116,8 @@ public class Sequence3<T> extends SequenceSecondary<T> {
     public final void transferFrom(Sequence<T> source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof Sequence3<?> : ""
-                + "Violation of: source is of dynamic type Sequence3<?>";
+        assert source instanceof Sequence3<?>
+                : "" + "Violation of: source is of dynamic type Sequence3<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type Sequence3<?>,
@@ -130,8 +139,8 @@ public class Sequence3<T> extends SequenceSecondary<T> {
         assert 0 <= pos : "Violation of: 0 <= pos";
         assert pos <= this.length() : "Violation of: pos <= |this|";
 
-        // TODO - fill in body
-
+        setLengthOfLeftStack(this.left, this.right, pos);
+        this.left.push(x);
     }
 
     @Override
@@ -139,19 +148,13 @@ public class Sequence3<T> extends SequenceSecondary<T> {
         assert 0 <= pos : "Violation of: 0 <= pos";
         assert pos < this.length() : "Violation of: pos < |this|";
 
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return null;
+        setLengthOfLeftStack(this.left, this.right, pos + 1);
+        return this.left.pop();
     }
 
     @Override
     public final int length() {
-
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return 0;
+        return this.left.length() + this.right.length();
     }
 
     @Override
