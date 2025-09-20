@@ -152,20 +152,23 @@ public class Map2<K, V> extends MapSecondary<K, V> {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return null;
+        moveToFront(this.pairsQueue, key);
+        return this.pairsQueue.dequeue();
     }
 
     @Override
     public final Pair<K, V> removeAny() {
         assert this.size() > 0 : "Violation of: |this| > 0";
 
-        // TODO - fill in body
+        int random = (int) (Math.random() * this.pairsQueue.length());
 
-        // This line added just to make the component compilable.
-        return null;
+        Pair<K, V> randomElement = this.pairsQueue.dequeue();
+        for (int i = 0; i < random; i++) {
+            this.pairsQueue.enqueue(randomElement);
+            randomElement = this.pairsQueue.dequeue();
+        }
+
+        return randomElement;
     }
 
     @Override
@@ -173,29 +176,46 @@ public class Map2<K, V> extends MapSecondary<K, V> {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
-        // TODO - fill in body
+        V value = null;
 
-        // This line added just to make the component compilable.
-        return null;
+        boolean found = false;
+        for (int i = 0; !found && i < this.pairsQueue.length(); i++) {
+            Pair<K, V> temp = this.pairsQueue.dequeue();
+
+            if (temp.key().equals(key)) {
+                found = true;
+
+                value = temp.value();
+            }
+
+            this.pairsQueue.enqueue(temp);
+        }
+
+        return value;
     }
 
     @Override
     public final boolean hasKey(K key) {
         assert key != null : "Violation of: key is not null";
 
-        // TODO - fill in body
+        boolean found = false;
 
-        // This line added just to make the component compilable.
-        return false;
+        for (int i = 0; !found && i < this.pairsQueue.length(); i++) {
+            Pair<K, V> temp = this.pairsQueue.dequeue();
+
+            if (temp.key().equals(key)) {
+                found = true;
+            }
+
+            this.pairsQueue.enqueue(temp);
+        }
+
+        return found;
     }
 
     @Override
     public final int size() {
-
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return 0;
+        return this.pairsQueue.length();
     }
 
     @Override
