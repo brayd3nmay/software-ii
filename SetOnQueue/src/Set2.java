@@ -45,8 +45,26 @@ public class Set2<T> extends SetSecondary<T> {
     private static <T> void moveToFront(Queue<T> q, T x) {
         assert q != null : "Violation of: q is not null";
 
-        // TODO - fill in body
+        boolean found = false;
+        Queue<T> helper = new Queue1L<>();
 
+        int length = q.length();
+        for (int i = 0; i < length; i++) {
+            T temp = q.dequeue();
+
+            if (!found && temp.equals(x)) {
+                found = true;
+            } else {
+                helper.enqueue(temp);
+            }
+        }
+
+        if (found) {
+            q.enqueue(x);
+        }
+        while (helper.length() > 0) {
+            q.enqueue(helper.dequeue());
+        }
     }
 
     /**
@@ -91,8 +109,8 @@ public class Set2<T> extends SetSecondary<T> {
     public final void transferFrom(Set<T> source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof Set2<?> : ""
-                + "Violation of: source is of dynamic type Set2<?>";
+        assert source instanceof Set2<?>
+                : "" + "Violation of: source is of dynamic type Set2<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type Set2<?>, and
@@ -112,8 +130,7 @@ public class Set2<T> extends SetSecondary<T> {
         assert x != null : "Violation of: x is not null";
         assert !this.contains(x) : "Violation of: x is not in this";
 
-        // TODO - fill in body
-
+        this.elements.enqueue(x);
     }
 
     @Override
@@ -121,39 +138,46 @@ public class Set2<T> extends SetSecondary<T> {
         assert x != null : "Violation of: x is not null";
         assert this.contains(x) : "Violation of: x is in this";
 
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return null;
+        moveToFront(this.elements, x);
+        return this.elements.dequeue();
     }
 
     @Override
     public final T removeAny() {
         assert this.size() > 0 : "Violation of: |this| > 0";
+        int random = (int) Math.random() * this.elements.length();
 
-        // TODO - fill in body
+        T randomElement = this.elements.dequeue();
+        for (int i = 0; i < random; i++) {
+            this.elements.enqueue(randomElement);
+            randomElement = this.elements.dequeue();
+        }
 
-        // This line added just to make the component compilable.
-        return null;
+        return randomElement;
     }
 
     @Override
     public final boolean contains(T x) {
         assert x != null : "Violation of: x is not null";
 
-        // TODO - fill in body
+        boolean found = false;
 
-        // This line added just to make the component compilable.
-        return false;
+        for (int i = 0; !found && i < this.elements.length(); i++) {
+            T temp = this.elements.dequeue();
+
+            if (temp.equals(x)) {
+                found = true;
+            }
+
+            this.elements.enqueue(temp);
+        }
+
+        return found;
     }
 
     @Override
     public final int size() {
-
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return 0;
+        return this.elements.length();
     }
 
     @Override
