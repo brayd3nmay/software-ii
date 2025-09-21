@@ -65,10 +65,21 @@ public final class BinaryTreeMethods {
         assert t != null : "Violation of: t is not null";
         assert x != null : "Violation of: x is not null";
 
-        // TODO - fill in body
+        boolean found = false;
+        if (t.size() != 0) {
+            BinaryTree<T> left = t.newInstance();
+            BinaryTree<T> right = t.newInstance();
 
-        // This line added just to make the component compilable.
-        return false;
+            T root = t.disassemble(left, right);
+
+            if (root.equals(x) || isInTree(left, x) || isInTree(right, x)) {
+                found = true;
+            }
+
+            t.assemble(root, left, right);
+        }
+
+        return found;
     }
 
     /**
