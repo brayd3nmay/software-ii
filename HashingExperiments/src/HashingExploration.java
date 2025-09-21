@@ -57,10 +57,12 @@ public final class HashingExploration {
     private static int hashCode(String s) {
         assert s != null : "Violation of: s is not null";
 
-        // TODO - fill in body
+        int hash = 0;
+        for (int i = 0; i < s.length(); i++) {
+            hash += s.charAt(i);
+        }
 
-        // This line added just to make the component compilable.
-        return 0;
+        return hash;
     }
 
     /**
