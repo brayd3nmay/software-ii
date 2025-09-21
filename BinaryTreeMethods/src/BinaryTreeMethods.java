@@ -65,18 +65,30 @@ public final class BinaryTreeMethods {
         assert t != null : "Violation of: t is not null";
         assert x != null : "Violation of: x is not null";
 
+        // recursive approach
+//        boolean found = false;
+//        if (t.size() != 0) {
+//            BinaryTree<T> left = t.newInstance();
+//            BinaryTree<T> right = t.newInstance();
+//
+//            T root = t.disassemble(left, right);
+//
+//            if (root.equals(x) || isInTree(left, x) || isInTree(right, x)) {
+//                found = true;
+//            }
+//
+//            t.assemble(root, left, right);
+//        }
+//
+//        return found;
+
+        // iterative approach
         boolean found = false;
-        if (t.size() != 0) {
-            BinaryTree<T> left = t.newInstance();
-            BinaryTree<T> right = t.newInstance();
 
-            T root = t.disassemble(left, right);
-
-            if (root.equals(x) || isInTree(left, x) || isInTree(right, x)) {
+        for (T node : t) {
+            if (node.equals(x)) {
                 found = true;
             }
-
-            t.assemble(root, left, right);
         }
 
         return found;
