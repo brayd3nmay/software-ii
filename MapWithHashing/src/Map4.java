@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import components.map.Map;
+import components.map.Map2;
 import components.map.MapSecondary;
 
 /**
@@ -102,15 +103,13 @@ public class Map4<K, V> extends MapSecondary<K, V> {
      */
     @SuppressWarnings("unchecked")
     private void createNewRep(int hashTableSize) {
-        /*
-         * With "new Map<K, V>[...]" in place of "new Map[...]" it does not
-         * compile; as shown, it results in a warning about an unchecked
-         * conversion, though it cannot fail.
-         */
         this.hashTable = new Map[hashTableSize];
 
-        // TODO - fill in rest of body
+        for (int i = 0; i < hashTableSize; i++) {
+            this.hashTable[i] = new Map2<K, V>();
+        }
 
+        this.size = 0;
     }
 
     /*
