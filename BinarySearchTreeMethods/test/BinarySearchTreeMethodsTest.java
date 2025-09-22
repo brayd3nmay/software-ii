@@ -47,7 +47,113 @@ public final class BinarySearchTreeMethodsTest {
         assertEquals(t2, t1);
     }
 
-    // TODO: add here other test cases for BinarySearchTreeMethods.isInTree
-    // (and for BinarySearchTreeMethods.removeSmallest)
+    // TODO: add here other test cases for BinarySearchTreeMethods.removeSmallest)
 
+    @Test
+    public void testIsInTreeEmpty() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs();
+        BinaryTree<String> t2 = createBSTFromArgs();
+        /*
+         * Call method under test
+         */
+        boolean inTree = BinarySearchTreeMethods.isInTree(t1, "a");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(false, inTree);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void testIsInTreeOneElement() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs("a");
+        BinaryTree<String> t2 = createBSTFromArgs("a");
+        /*
+         * Call method under test
+         */
+        boolean inTree = BinarySearchTreeMethods.isInTree(t1, "a");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(true, inTree);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void testIsInTreeOneElementFalse() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs("a");
+        BinaryTree<String> t2 = createBSTFromArgs("a");
+        /*
+         * Call method under test
+         */
+        boolean inTree = BinarySearchTreeMethods.isInTree(t1, "b");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(false, inTree);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void testIsInTreeRoot() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs("b", "a", "c");
+        BinaryTree<String> t2 = createBSTFromArgs("b", "a", "c");
+        /*
+         * Call method under test
+         */
+        boolean inTree = BinarySearchTreeMethods.isInTree(t1, "b");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(true, inTree);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void testIsInTreeLeftLeaf() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs("b", "a", "c");
+        BinaryTree<String> t2 = createBSTFromArgs("b", "a", "c");
+        /*
+         * Call method under test
+         */
+        boolean inTree = BinarySearchTreeMethods.isInTree(t1, "a");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(true, inTree);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void testIsInTreeRightLeaf() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs("b", "a", "c");
+        BinaryTree<String> t2 = createBSTFromArgs("b", "a", "c");
+        /*
+         * Call method under test
+         */
+        boolean inTree = BinarySearchTreeMethods.isInTree(t1, "c");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(true, inTree);
+        assertEquals(t2, t1);
+    }
 }
