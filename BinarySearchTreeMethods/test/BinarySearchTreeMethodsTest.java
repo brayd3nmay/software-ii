@@ -30,26 +30,6 @@ public final class BinarySearchTreeMethodsTest {
     }
 
     @Test
-    public void sampleTest() {
-        /*
-         * Set up variables
-         */
-        BinaryTree<String> t1 = createBSTFromArgs("b", "a", "c");
-        BinaryTree<String> t2 = createBSTFromArgs("b", "a", "c");
-        /*
-         * Call method under test
-         */
-        boolean inTree = BinarySearchTreeMethods.isInTree(t1, "a");
-        /*
-         * Assert that values of variables match expectations
-         */
-        assertEquals(true, inTree);
-        assertEquals(t2, t1);
-    }
-
-    // TODO: add here other test cases for BinarySearchTreeMethods.removeSmallest)
-
-    @Test
     public void testIsInTreeEmpty() {
         /*
          * Set up variables
@@ -154,6 +134,42 @@ public final class BinarySearchTreeMethodsTest {
          * Assert that values of variables match expectations
          */
         assertEquals(true, inTree);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void testRemoveSmallestRoot() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs("1", "2", "3");
+        BinaryTree<String> t2 = createBSTFromArgs("2", "3");
+        /*
+         * Call method under test
+         */
+        String smallest = BinarySearchTreeMethods.removeSmallest(t1);
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals("1", smallest);
+        assertEquals(t2, t1);
+    }
+
+    @Test
+    public void testRemoveSmallest() {
+        /*
+         * Set up variables
+         */
+        BinaryTree<String> t1 = createBSTFromArgs("2", "1", "3");
+        BinaryTree<String> t2 = createBSTFromArgs("2", "3");
+        /*
+         * Call method under test
+         */
+        String smallest = BinarySearchTreeMethods.removeSmallest(t1);
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals("1", smallest);
         assertEquals(t2, t1);
     }
 }
