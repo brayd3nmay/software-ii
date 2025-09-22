@@ -182,8 +182,11 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert value != null : "Violation of: value is not null";
         assert !this.hasKey(key) : "Violation of: key is not in DOMAIN(this)";
 
-        // TODO - fill in body
+        int hash = key.hashCode();
+        int index = mod(hash, this.hashTable.length);
 
+        this.hashTable[index].add(key, value);
+        this.size++;
     }
 
     @Override
@@ -191,20 +194,29 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
-        // TODO - fill in body
+        int hash = key.hashCode();
+        int index = mod(hash, this.hashTable.length);
 
-        // This line added just to make the component compilable.
-        return null;
+        Pair<K, V> removed = this.hashTable[index].remove(key);
+        this.size--;
+
+        return removed;
     }
 
     @Override
     public final Pair<K, V> removeAny() {
         assert this.size() > 0 : "Violation of: this /= empty_set";
 
-        // TODO - fill in body
+        int randomBucket = (int) (Math.random() * this.hashTable.length);
 
-        // This line added just to make the component compilable.
-        return null;
+        while (this.hashTable[randomBucket].size() == 0) {
+            randomBucket = (int) (Math.random() * this.hashTable.length);
+        }
+
+        Pair<K, V> random = this.hashTable[randomBucket].removeAny();
+        this.size--;
+
+        return random;
     }
 
     @Override
@@ -212,29 +224,25 @@ public class Map4<K, V> extends MapSecondary<K, V> {
         assert key != null : "Violation of: key is not null";
         assert this.hasKey(key) : "Violation of: key is in DOMAIN(this)";
 
-        // TODO - fill in body
+        int hash = key.hashCode();
+        int index = mod(hash, this.hashTable.length);
 
-        // This line added just to make the component compilable.
-        return null;
+        return this.hashTable[index].value(key);
     }
 
     @Override
     public final boolean hasKey(K key) {
         assert key != null : "Violation of: key is not null";
 
-        // TODO - fill in body
+        int hash = key.hashCode();
+        int index = mod(hash, this.hashTable.length);
 
-        // This line added just to make the component compilable.
-        return false;
+        return this.hashTable[index].hasKey(key);
     }
 
     @Override
     public final int size() {
-
-        // TODO - fill in body
-
-        // This line added just to make the component compilable.
-        return 0;
+        return this.size;
     }
 
     @Override
