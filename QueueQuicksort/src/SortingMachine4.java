@@ -94,8 +94,18 @@ public class SortingMachine4<T> extends SortingMachineSecondary<T> {
         assert back != null : "Violation of: back is not null";
         assert order != null : "Violation of: order is not null";
 
-        // TODO #1 - fill in body
+        front.clear();
+        back.clear();
 
+        while (q.length() > 0) {
+            T curr = q.dequeue();
+
+            if (order.compare(curr, partitioner) <= 0) {
+                front.enqueue(curr);
+            } else {
+                back.enqueue(curr);
+            }
+        }
     }
 
     /**
@@ -115,8 +125,21 @@ public class SortingMachine4<T> extends SortingMachineSecondary<T> {
     private static <T> void sort(Queue<T> q, Comparator<T> order) {
         assert order != null : "Violation of: order is not null";
 
-        // TODO #2 - fill in body
+        if (q.length() > 1) {
 
+            T pivot = q.dequeue();
+
+            Queue<T> left = q.newInstance();
+            Queue<T> right = q.newInstance();
+            partition(q, pivot, left, right, order);
+
+            left.sort(order);
+            right.sort(order);
+
+            q.append(left);
+            q.enqueue(pivot);
+            q.append(right);
+        }
     }
 
     /**
@@ -170,8 +193,8 @@ public class SortingMachine4<T> extends SortingMachineSecondary<T> {
     public final void transferFrom(SortingMachine<T> source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof SortingMachine4<?> : ""
-                + "Violation of: source is of dynamic type SortingMachine4<?>";
+        assert source instanceof SortingMachine4<?>
+                : "" + "Violation of: source is of dynamic type SortingMachine4<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type
