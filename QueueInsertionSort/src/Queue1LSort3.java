@@ -56,14 +56,28 @@ public final class Queue1LSort3<T> extends Queue1L<T> {
      * IS_SORTED(q, [relation computed by order.compare method])
      * </pre>
      */
-    private static <T> void insertInOrder(Queue<T> q, T x,
-            Comparator<T> order) {
+    private static <T> void insertInOrder(Queue<T> q, T x, Comparator<T> order) {
         assert q != null : "Violation of: q is not null";
         assert x != null : "Violation of: x is not null";
         assert order != null : "Violation of: order is not null";
 
-        // TODO - fill in body
+        int length = q.length();
+        boolean inserted = false;
 
+        for (int i = 0; i < length; i++) {
+            T curr = q.dequeue();
+
+            if (!inserted && order.compare(x, curr) < 0) {
+                q.enqueue(x);
+                inserted = true;
+            }
+
+            q.enqueue(curr);
+        }
+
+        if (!inserted) {
+            q.enqueue(x);
+        }
     }
 
     @Override
