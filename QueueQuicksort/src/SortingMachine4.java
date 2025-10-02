@@ -133,8 +133,8 @@ public class SortingMachine4<T> extends SortingMachineSecondary<T> {
             Queue<T> right = q.newInstance();
             partition(q, pivot, left, right, order);
 
-            left.sort(order);
-            right.sort(order);
+            sort(left, order);
+            sort(right, order);
 
             q.append(left);
             q.enqueue(pivot);
