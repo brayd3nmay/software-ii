@@ -1,3 +1,7 @@
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import components.stack.Stack;
 
 /**
@@ -65,6 +69,136 @@ public abstract class StackTest {
         return stack;
     }
 
-    // TODO - add test cases for constructor, push, pop, and length
+    /*
+     * Test cases for constructor
+     */
+    @Test
+    public final void testConstructor() {
+        /*
+         * Set up variables and call method under test
+         */
+        Stack<String> s = this.constructorTest();
+        Stack<String> sExpected = this.constructorRef();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(sExpected, s);
+    }
 
+    /*
+     * Test cases for push
+     */
+
+    @Test
+    public final void testPushEmptySet() {
+        /*
+         * Set up variables and call method under test
+         */
+        Stack<String> s = this.createFromArgsTest();
+        Stack<String> sExpected = this.createFromArgsRef("1");
+        /*
+         * Call method under test
+         */
+        s.push("1");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(sExpected, s);
+    }
+
+    @Test
+    public final void testPushNonEmptySet() {
+        /*
+         * Set up variables and call method under test
+         */
+        Stack<String> s = this.createFromArgsTest("2", "3", "4");
+        Stack<String> sExpected = this.createFromArgsRef("1", "2", "3", "4");
+        /*
+         * Call method under test
+         */
+        s.push("1");
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(sExpected, s);
+    }
+
+    /*
+     * Test cases for pop
+     */
+
+    @Test
+    public final void testPopEmptyStack() {
+        /*
+         * Set up variables and call method under test
+         */
+        Stack<String> s = this.createFromArgsTest("1");
+        Stack<String> sExpected = this.createFromArgsRef();
+        /*
+         * Call method under test
+         */
+        String removed = s.pop();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(sExpected, s);
+        assertEquals("1", removed);
+    }
+
+    @Test
+    public final void testPopNonEmptyStack() {
+        /*
+         * Set up variables and call method under test
+         */
+        Stack<String> s = this.createFromArgsTest("1", "2", "3", "4");
+        Stack<String> sExpected = this.createFromArgsRef("2", "3", "4");
+        /*
+         * Call method under test
+         */
+        String removed = s.pop();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(sExpected, s);
+        assertEquals("1", removed);
+    }
+
+    /*
+     * Test cases for length
+     */
+    @Test
+    public final void testLengthEmptyStack() {
+        /*
+         * Set up variables and call method under test
+         */
+        Stack<String> s = this.createFromArgsTest();
+        Stack<String> sExpected = this.createFromArgsRef();
+        /*
+         * Call method under test
+         */
+        int size = s.length();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(sExpected, s);
+        assertEquals(0, size);
+    }
+
+    @Test
+    public final void testLengthNonEmptyStack() {
+        /*
+         * Set up variables and call method under test
+         */
+        Stack<String> s = this.createFromArgsTest("1", "2", "3", "4");
+        Stack<String> sExpected = this.createFromArgsRef("1", "2", "3", "4");
+        /*
+         * Call method under test
+         */
+        int size = s.length();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(sExpected, s);
+        assertEquals(4, size);
+    }
 }
