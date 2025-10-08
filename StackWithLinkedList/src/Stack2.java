@@ -170,7 +170,14 @@ public class Stack2<T> extends StackSecondary<T> {
     public final void push(T x) {
         assert x != null : "Violation of: x is not null";
 
-        // TODO - fill in body
+        Node temp = new Node();
+
+        temp.data = x;
+        temp.next = this.top;
+
+        this.top = temp;
+
+        this.length++;
 
         assert this.conventionHolds();
     }
@@ -179,21 +186,24 @@ public class Stack2<T> extends StackSecondary<T> {
     public final T pop() {
         assert this.length() > 0 : "Violation of: this /= <>";
 
-        // TODO - fill in body
+        T temp = this.top.data;
+        this.top = this.top.next;
+
+        this.length--;
 
         assert this.conventionHolds();
-        // Fix this line to return the result after checking the convention.
-        return null;
+
+        return temp;
     }
 
     @Override
     public final int length() {
 
-        // TODO - fill in body
+        int length = this.length;
 
         assert this.conventionHolds();
-        // Fix this line to return the result after checking the convention.
-        return 0;
+
+        return length;
     }
 
     @Override
