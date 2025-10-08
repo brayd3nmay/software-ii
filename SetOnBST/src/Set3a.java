@@ -103,7 +103,7 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
             } else {
                 insertInTree(right, x);
             }
-            
+
             t.assemble(root, left, right);
         } else {
             t.assemble(x, left, right);
@@ -129,10 +129,26 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
         assert t != null : "Violation of: t is not null";
         assert t.size() > 0 : "Violation of: |t| > 0";
 
-        // TODO - fill in body
+        T smallest = null;
 
-        // This line added just to make the component compilable.
-        return null;
+        if (t.height() != 0) {
+            BinaryTree<T> left = t.newInstance();
+            BinaryTree<T> right = t.newInstance();
+
+            T root = t.disassemble(left, right);
+
+            if (left.height() == 0) {
+                smallest = root;
+
+                t.transferFrom(right);
+            } else {
+                smallest = removeSmallest(left);
+
+                t.assemble(root, left, right);
+            }
+        }
+
+        return smallest;
     }
 
     /**
