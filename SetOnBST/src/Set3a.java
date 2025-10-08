@@ -21,7 +21,7 @@ import components.set.SetSecondary;
  * @convention IS_BST($this.tree)
  * @correspondence this = labels($this.tree)
  *
- * @author Put your name here
+ * @author Brayden May
  *
  */
 public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
@@ -48,15 +48,30 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
      * @requires IS_BST(t)
      * @ensures isInTree = (x is in labels(t))
      */
-    private static <T extends Comparable<T>> boolean isInTree(BinaryTree<T> t,
-            T x) {
+    private static <T extends Comparable<T>> boolean isInTree(BinaryTree<T> t, T x) {
         assert t != null : "Violation of: t is not null";
         assert x != null : "Violation of: x is not null";
 
-        // TODO - fill in body
+        boolean inTree = false;
 
-        // This line added just to make the component compilable.
-        return false;
+        if (t.height() != 0) {
+            BinaryTree<T> left = t.newInstance();
+            BinaryTree<T> right = t.newInstance();
+
+            T root = t.disassemble(left, right);
+
+            if (root.equals(x)) {
+                inTree = true;
+            } else if (x.compareTo(root) < 0) {
+                inTree = isInTree(left, x);
+            } else {
+                inTree = isInTree(right, x);
+            }
+
+            t.assemble(root, left, right);
+        }
+
+        return inTree;
     }
 
     /**
@@ -73,8 +88,7 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
      * @requires IS_BST(t) and x is not in labels(t)
      * @ensures IS_BST(t) and labels(t) = labels(#t) union {x}
      */
-    private static <T extends Comparable<T>> void insertInTree(BinaryTree<T> t,
-            T x) {
+    private static <T extends Comparable<T>> void insertInTree(BinaryTree<T> t, T x) {
         assert t != null : "Violation of: t is not null";
         assert x != null : "Violation of: x is not null";
 
@@ -125,8 +139,7 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
      *  labels(t) = labels(#t) \ {x}
      * </pre>
      */
-    private static <T extends Comparable<T>> T removeFromTree(BinaryTree<T> t,
-            T x) {
+    private static <T extends Comparable<T>> T removeFromTree(BinaryTree<T> t, T x) {
         assert t != null : "Violation of: t is not null";
         assert x != null : "Violation of: x is not null";
         assert t.size() > 0 : "Violation of: x is in labels(t)";
@@ -183,8 +196,8 @@ public class Set3a<T extends Comparable<T>> extends SetSecondary<T> {
     public final void transferFrom(Set<T> source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof Set3a<?> : ""
-                + "Violation of: source is of dynamic type Set3<?>";
+        assert source instanceof Set3a<?>
+                : "" + "Violation of: source is of dynamic type Set3<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type Set3a<?>, and
