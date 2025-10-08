@@ -78,11 +78,11 @@ public class Stack2<T> extends StackSecondary<T> {
     private boolean conventionHolds() {
         assert this.length >= 0 : "Violation of: $this.length >= 0";
         if (this.length == 0) {
-            assert this.top == null : ""
-                    + "Violation of: if $this.length == 0 then $this.top is null";
+            assert this.top == null
+                    : "" + "Violation of: if $this.length == 0 then $this.top is null";
         } else {
-            assert this.top != null : ""
-                    + "Violation of: if $this.length > 0 then $this.top is not null";
+            assert this.top != null
+                    : "" + "Violation of: if $this.length > 0 then $this.top is not null";
             int count = 0;
             Node tmp = this.top;
             while ((tmp != null) && (count < this.length)) {
@@ -105,7 +105,8 @@ public class Stack2<T> extends StackSecondary<T> {
      */
     private void createNewRep() {
 
-        // TODO - fill in body
+        this.top = null;
+        this.length = 0;
 
     }
 
@@ -146,8 +147,8 @@ public class Stack2<T> extends StackSecondary<T> {
     public final void transferFrom(Stack<T> source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof Stack2<?> : ""
-                + "Violation of: source is of dynamic type Stack2<?>";
+        assert source instanceof Stack2<?>
+                : "" + "Violation of: source is of dynamic type Stack2<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type Stack2<?>, and
@@ -243,8 +244,7 @@ public class Stack2<T> extends StackSecondary<T> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException(
-                    "remove operation not supported");
+            throw new UnsupportedOperationException("remove operation not supported");
         }
 
     }
