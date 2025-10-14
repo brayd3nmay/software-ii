@@ -181,13 +181,13 @@ public class List2a<T> extends ListSecondary<T> {
 
     @Override
     public final Iterator<T> iterator() {
-        return new List2Iterator();
+        return new List2aIterator();
     }
 
     /**
      * Implementation of {@code Iterator} interface for {@code List2}.
      */
-    private final class List2Iterator implements Iterator<T> {
+    private final class List2aIterator implements Iterator<T> {
 
         /**
          * Current node in the linked list.
@@ -197,13 +197,13 @@ public class List2a<T> extends ListSecondary<T> {
         /**
          * No-argument constructor.
          */
-        private List2Iterator() {
+        private List2aIterator() {
             this.current = List2a.this.preStart.next;
         }
 
         @Override
         public boolean hasNext() {
-            return this.current != null;
+            return this.current != List2a.this.postFinish;
         }
 
         @Override
