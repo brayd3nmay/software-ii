@@ -84,8 +84,9 @@ public class List2a<T> extends ListSecondary<T> {
      */
     private void createNewRep() {
         this.preStart = new Node();
-        this.preStart.next = null;
-        this.postFinish = this.preStart;
+        this.postFinish = new Node();
+        this.postFinish.next = null;
+        this.preStart.next = this.postFinish;
         this.lastLeft = this.preStart;
         this.leftLength = 0;
         this.rightLength = 0;
