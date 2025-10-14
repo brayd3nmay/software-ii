@@ -119,7 +119,7 @@ public class List2a<T> extends ListSecondary<T> {
     @Override
     public final void transferFrom(List<T> source) {
         assert source instanceof List2a<?>
-                : "" + "Violation of: source is of dynamic type List2<?>";
+                : "" + "Violation of: source is of dynamic type List2a<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type List2<?>, and
