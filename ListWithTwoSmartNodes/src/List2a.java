@@ -65,9 +65,9 @@ public class List2a<T> extends ListSecondary<T> {
     private Node lastLeft;
 
     /**
-     * Finish node of linked list.
+     * Second smart node after the last data node.
      */
-    private Node finish;
+    private Node postFinish;
 
     /**
      * Length of this.left.
@@ -85,7 +85,7 @@ public class List2a<T> extends ListSecondary<T> {
     private void createNewRep() {
         this.preStart = new Node();
         this.preStart.next = null;
-        this.finish = this.preStart;
+        this.postFinish = this.preStart;
         this.lastLeft = this.preStart;
         this.leftLength = 0;
         this.rightLength = 0;
@@ -116,8 +116,8 @@ public class List2a<T> extends ListSecondary<T> {
 
     @Override
     public final void transferFrom(List<T> source) {
-        assert source instanceof List2a<?> : ""
-                + "Violation of: source is of dynamic type List2<?>";
+        assert source instanceof List2a<?>
+                : "" + "Violation of: source is of dynamic type List2<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type List2<?>, and
@@ -126,7 +126,7 @@ public class List2a<T> extends ListSecondary<T> {
         List2a<T> localSource = (List2a<T>) source;
         this.preStart = localSource.preStart;
         this.lastLeft = localSource.lastLeft;
-        this.finish = localSource.finish;
+        this.postFinish = localSource.postFinish;
         this.rightLength = localSource.rightLength;
         this.leftLength = localSource.leftLength;
         localSource.createNewRep();
@@ -141,7 +141,7 @@ public class List2a<T> extends ListSecondary<T> {
         p.next = q.next;
         q.next = p;
         if (this.rightLength == 0) {
-            this.finish = p;
+            this.postFinish = p;
         }
         this.rightLength++;
     }
@@ -154,7 +154,7 @@ public class List2a<T> extends ListSecondary<T> {
         p.next = q.next;
         T x = q.data;
         if (this.rightLength == 1) {
-            this.finish = this.lastLeft;
+            this.postFinish = this.lastLeft;
         }
         this.rightLength--;
         return x;
@@ -242,7 +242,7 @@ public class List2a<T> extends ListSecondary<T> {
 
     @Override
     public final void moveToFinish() {
-        this.lastLeft = this.finish;
+        this.lastLeft = this.postFinish;
         this.leftLength += this.rightLength;
         this.rightLength = 0;
     }
