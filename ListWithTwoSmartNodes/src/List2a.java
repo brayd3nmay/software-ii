@@ -9,7 +9,8 @@ import components.list.ListSecondary;
  * implementations of primary methods.
  *
  * <p>
- * Execution-time performance of all methods implemented in this class is O(1).
+ * All kernel methods implemented in this class are O(1). The overridden
+ * secondary method moveToFinish is O(n).
  * </p>
  *
  * @param <T>
@@ -235,7 +236,12 @@ public class List2a<T> extends ListSecondary<T> {
 
     @Override
     public final void moveToFinish() {
-        this.lastLeft = this.postFinish;
+        Node temp = this.lastLeft;
+
+        while (temp.next != this.postFinish) {
+            temp = temp.next;
+        }
+        this.lastLeft = temp;
         this.leftLength += this.rightLength;
         this.rightLength = 0;
     }
