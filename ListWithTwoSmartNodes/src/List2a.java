@@ -137,26 +137,18 @@ public class List2a<T> extends ListSecondary<T> {
     public final void addRightFront(T x) {
         assert x != null : "Violation of: x is not null";
         Node p = new Node();
-        Node q = this.lastLeft;
         p.data = x;
-        p.next = q.next;
-        q.next = p;
-        if (this.rightLength == 0) {
-            this.postFinish = p;
-        }
+        p.next = this.lastLeft.next;
+        this.lastLeft.next = p;
         this.rightLength++;
     }
 
     @Override
     public final T removeRightFront() {
         assert this.rightLength() > 0 : "Violation of: this.right /= <>";
-        Node p = this.lastLeft;
-        Node q = p.next;
-        p.next = q.next;
+        Node q = this.lastLeft.next;
+        this.lastLeft.next = q.next;
         T x = q.data;
-        if (this.rightLength == 1) {
-            this.postFinish = this.lastLeft;
-        }
         this.rightLength--;
         return x;
     }
