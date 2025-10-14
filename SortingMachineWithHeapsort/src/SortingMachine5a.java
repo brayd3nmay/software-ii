@@ -174,15 +174,42 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         assert isHeap(array, 2 * top + 2, last, order)
                 : "" + "Violation of: SUBTREE_IS_HEAP(array, 2 * top + 2, last,"
                         + " [relation computed by order.compare method])";
-        /*
-         * Impractical to check last requires clause; no need to check the other
-         * requires clause, because it must be true when using the array
-         * representation for a complete binary tree.
-         */
 
-        // TODO - fill in body
-        // *** you must use the recursive algorithm discussed in class ***
+        int leftIdx = top * 2 + 1;
+        if (leftIdx <= last) {
+            T root = array[top];
 
+            int rightIdx = leftIdx + 1;
+
+            T left;
+            T right;
+
+            // the heap has both children
+            if (rightIdx <= last) {
+                left = array[leftIdx];
+                right = array[rightIdx];
+
+                // the right child is the smaller of the two
+                if (order.compare(right, left) < 0) {
+                    if (order.compare(right, root) < 0) {
+                        exchangeEntries(array, top, rightIdx);
+                        siftDown(array, rightIdx, last, order);
+                    }
+                } else { // the left child is the smaller of the two or tie
+                    if (order.compare(left, root) < 0) {
+                        exchangeEntries(array, top, leftIdx);
+                        siftDown(array, leftIdx, last, order);
+                    }
+                }
+            } else { // there is only a left child
+                left = array[leftIdx];
+
+                if (order.compare(left, root) < 0) {
+                    exchangeEntries(array, top, leftIdx);
+                    siftDown(array, leftIdx, last, order);
+                }
+            }
+        }
     }
 
     /**
