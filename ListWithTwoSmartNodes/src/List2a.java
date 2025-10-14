@@ -186,7 +186,7 @@ public class List2a<T> extends ListSecondary<T> {
     }
 
     /**
-     * Implementation of {@code Iterator} interface for {@code List2}.
+     * Implementation of {@code Iterator} interface for {@code List2a}.
      */
     private final class List2aIterator implements Iterator<T> {
 
