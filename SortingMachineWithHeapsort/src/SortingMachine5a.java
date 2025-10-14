@@ -246,15 +246,21 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
             assert array[i] != null
                     : "" + "Violation of: all entries in array are not null";
         }
-        /*
-         * Impractical to check last requires clause; no need to check the other
-         * requires clause, because it must be true when using the array
-         * representation for a complete binary tree.
-         */
 
-        // TODO - fill in body
-        // *** you must use the recursive algorithm discussed in class ***
+        int length = array.length;
+        int last = length - 1;
+        int leftIdx = top * 2 + 1;
 
+        if (length > 1 && leftIdx <= last) {
+            heapify(array, leftIdx, order);
+
+            int rightIdx = leftIdx + 1;
+            if (rightIdx <= last) {
+                heapify(array, rightIdx, order);
+            }
+
+            siftDown(array, top, last, order);
+        }
     }
 
     /**
