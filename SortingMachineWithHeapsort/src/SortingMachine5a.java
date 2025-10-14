@@ -115,7 +115,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         assert 0 <= j : "Violation of: 0 <= j";
         assert j < array.length : "Violation of: j < |array|";
 
-        if (!array[i].equals(array[j])) {
+        if (i != j) {
             T temp = array[i];
             array[i] = array[j];
             array[j] = temp;
