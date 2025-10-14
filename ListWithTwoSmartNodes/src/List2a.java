@@ -19,20 +19,20 @@ import components.list.ListSecondary;
  * [$this.rightLength >= 0] and
  * [$this.preStart is not null]  and
  * [$this.lastLeft is not null]  and
- * [$this.finish is not null]  and
+ * [$this.postFinish is not null]  and
  * [$this.preStart points to the first node of a singly linked list
- *  containing $this.leftLength + $this.rightLength + 1 nodes]  and
+ *  containing $this.leftLength + $this.rightLength + 2 nodes]  and
  * [$this.lastLeft points to the ($this.leftLength + 1)-th node in
  *  that singly linked list]  and
- * [$this.finish points to the last node in that singly linked list]  and
- * [$this.finish.next is null]
+ * [$this.postFinish points to the last node in that singly linked list]  and
+ * [$this.postFinish.next is null]
  * </pre>
  * @correspondence <pre>
  * this =
  *  ([data in nodes starting at $this.preStart.next and running through
  *    $this.lastLeft],
- *   [data in nodes starting at $this.lastLeft.next and running through
- *    $this.finish])
+ *   [data in nodes starting at $this.lastLeft.next and running through the node
+ *    just before $this.postFinish])
  * </pre>
  */
 public class List2a<T> extends ListSecondary<T> {
