@@ -180,10 +180,10 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         if (leftIdx <= last) {
             T root = array[top];
 
-            int rightIdx = leftIdx + 1;
-
             T left;
             T right;
+
+            int rightIdx = leftIdx + 1;
 
             // the heap has both children
             if (rightIdx <= last) {
@@ -250,18 +250,18 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
 
         int length = array.length;
         int last = length - 1;
-        int leftIdx = top * 2 + 1;
 
-        if (length > 1 && leftIdx <= last) {
-            heapify(array, leftIdx, order);
-
-            int rightIdx = leftIdx + 1;
-            if (rightIdx <= last) {
-                heapify(array, rightIdx, order);
-            }
-
-            siftDown(array, top, last, order);
+        int left = top * 2 + 1;
+        if (left < last) {
+            heapify(array, left, order);
         }
+
+        int right = left + 1;
+        if (right < last) {
+            heapify(array, right, order);
+        }
+
+        siftDown(array, top, last, order);
     }
 
     /**
