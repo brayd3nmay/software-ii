@@ -500,7 +500,9 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
     public final void changeToExtractionMode() {
         assert this.isInInsertionMode() : "Violation of: this.insertion_mode";
 
-        // TODO - fill in body
+        this.heap = buildHeap(this.entries, this.order());
+        this.heapSize = this.heap.length;
+        this.insertionMode = false;
 
         assert this.conventionHolds();
     }
