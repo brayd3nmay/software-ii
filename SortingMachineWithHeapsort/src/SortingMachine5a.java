@@ -500,7 +500,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
     public final void changeToExtractionMode() {
         assert this.isInInsertionMode() : "Violation of: this.insertion_mode";
 
-        this.heap = buildHeap(this.entries, this.order());
+        this.heap = buildHeap(this.entries, this.machineOrder);
         this.heapSize = this.heap.length;
         this.insertionMode = false;
 
@@ -512,11 +512,18 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         assert !this.isInInsertionMode() : "Violation of: not this.insertion_mode";
         assert this.size() > 0 : "Violation of: this.contents /= {}";
 
-        // TODO - fill in body
+        T first = this.heap[0];
+        if (this.heapSize > 1) {
+            exchangeEntries(this.heap, 0, this.heapSize - 1);
+        }
+        this.heapSize--;
+
+        if (this.heapSize > 0) {
+            siftDown(this.heap, 0, this.heapSize - 1, this.machineOrder);
+        }
 
         assert this.conventionHolds();
-        // Fix this line to return the result after checking the convention.
-        return null;
+        return first;
     }
 
     @Override
@@ -534,11 +541,16 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
     @Override
     public final int size() {
 
-        // TODO - fill in body
+        int size;
+        if (this.insertionMode) {
+            size = this.entries.length();
+        } else {
+            size = this.heapSize;
+        }
 
         assert this.conventionHolds();
-        // Fix this line to return the result after checking the convention.
-        return 0;
+
+        return size;
     }
 
     @Override
