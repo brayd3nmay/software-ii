@@ -518,7 +518,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         }
         this.heapSize--;
 
-        if (this.heapSize > 0) {
+        if (this.heapSize > 1) {
             siftDown(this.heap, 0, this.heapSize - 1, this.machineOrder);
         }
 
