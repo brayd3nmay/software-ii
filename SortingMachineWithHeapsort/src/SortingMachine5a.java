@@ -288,17 +288,17 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
     private static <T> T[] buildHeap(Queue<T> q, Comparator<T> order) {
         assert q != null : "Violation of: q is not null";
         assert order != null : "Violation of: order is not null";
-        /*
-         * Impractical to check the requires clause.
-         */
-        /*
-         * With "new T[...]" in place of "new Object[...]" it does not compile;
-         * as shown, it results in a warning about an unchecked cast, though it
-         * cannot fail.
-         */
-        T[] heap = (T[]) (new Object[q.length()]);
 
-        // TODO - fill in rest of body
+        int length = q.length();
+        T[] heap = (T[]) (new Object[length]);
+
+        if (length > 0) {
+            for (int i = 0; i < length; i++) {
+                heap[i] = q.dequeue();
+            }
+
+            heapify(heap, 0, order);
+        }
 
         return heap;
     }
