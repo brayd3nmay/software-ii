@@ -5,7 +5,7 @@ import components.statement.Statement;
  * instructions (move, turnleft, turnright, infect, skip) in a given
  * {@code Statement}.
  *
- * @author Put your name here
+ * @author Brayden May
  *
  */
 public final class CountPrimitiveCalls {
@@ -37,7 +37,12 @@ public final class CountPrimitiveCalls {
                  * nested statement in the BLOCK.
                  */
 
-                // TODO - fill in case
+                int length = s.lengthOfBlock();
+                for (int i = 0; i < length; i++) {
+                    Statement currentStatement = s.removeFromBlock(0);
+                    count += countOfPrimitiveCalls(currentStatement);
+                    s.addToBlock(s.lengthOfBlock(), currentStatement);
+                }
 
                 break;
             }
@@ -47,7 +52,12 @@ public final class CountPrimitiveCalls {
                  * body of the IF.
                  */
 
-                // TODO - fill in case
+                Statement label = s.newInstance();
+
+                Statement.Condition c = s.disassembleIf(label);
+                count = countOfPrimitiveCalls(label);
+
+                s.assembleIf(c, label);
 
                 break;
             }
@@ -57,7 +67,14 @@ public final class CountPrimitiveCalls {
                  * "then" and "else" bodies of the IF_ELSE.
                  */
 
-                // TODO - fill in case
+                Statement labelIf = s.newInstance();
+                Statement labelElse = s.newInstance();
+
+                Statement.Condition c = s.disassembleIfElse(labelIf, labelElse);
+
+                count = countOfPrimitiveCalls(labelIf) + countOfPrimitiveCalls(labelElse);
+
+                s.assembleIfElse(c, labelIf, labelElse);
 
                 break;
             }
@@ -67,7 +84,13 @@ public final class CountPrimitiveCalls {
                  * body of the WHILE.
                  */
 
-                // TODO - fill in case
+                Statement label = s.newInstance();
+
+                Statement.Condition c = s.disassembleWhile(label);
+
+                count = countOfPrimitiveCalls(label);
+
+                s.assembleWhile(c, label);
 
                 break;
             }
@@ -77,12 +100,27 @@ public final class CountPrimitiveCalls {
                  * whether this is a call to a primitive instruction or not.
                  */
 
-                // TODO - fill in case
+                String instruction = s.disassembleCall();
+
+                switch (instruction) {
+                    case "turnleft":
+                    case "turnright":
+                    case "move":
+                    case "skip":
+                    case "infect": {
+                        count++;
+                        break;
+                    }
+                    default:
+                }
+
+                s.assembleCall(instruction);
 
                 break;
             }
             default: {
-                // this will never happen...can you explain why?
+                // this is never supposed to happen
+                // every kind of statement is contained is the switch
                 break;
             }
         }
