@@ -372,7 +372,9 @@ public class List3<T> extends ListSecondary<T> {
     @Override
     public final void moveToFinish() {
 
-        // TODO - fill in body
+        this.lastLeft = this.postFinish.previous;
+        this.leftLength += this.rightLength;
+        this.rightLength = 0;
 
         assert this.conventionHolds();
     }
