@@ -383,7 +383,11 @@ public class List3<T> extends ListSecondary<T> {
     public final void retreat() {
         assert this.leftLength() > 0 : "Violation of: this.left /= <>";
 
-        // TODO - fill in body
+        Node currPosition = this.lastLeft;
+        this.lastLeft = currPosition.previous;
+
+        this.leftLength--;
+        this.rightLength++;
 
         assert this.conventionHolds();
     }
