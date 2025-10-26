@@ -38,7 +38,7 @@ import components.list.ListSecondary;
  *    $this.postFinish.previous])
  * </pre>
  *
- * @author Put your name here
+ * @author Brayden May
  *
  */
 public class List3<T> extends ListSecondary<T> {
@@ -142,31 +142,30 @@ public class List3<T> extends ListSecondary<T> {
              * Check for every node n in the doubly linked list of nodes, except
              * the one pointed to by $this.postFinish, n.next.previous = n
              */
-            assert (n.next != null) && (n.next.previous == n) : ""
-                    + "Violation of: [for every node n in the doubly linked"
-                    + " list of nodes, except the one pointed to by"
-                    + " $this.postFinish, n.next.previous = n]";
+            assert (n.next != null) && (n.next.previous == n)
+                    : "" + "Violation of: [for every node n in the doubly linked"
+                            + " list of nodes, except the one pointed to by"
+                            + " $this.postFinish, n.next.previous = n]";
             n = n.next;
             /*
              * Check for every node n in the doubly linked list of nodes, except
              * the one pointed to by $this.preStart, n.previous.next = n
              */
-            assert n.previous.next == n : ""
-                    + "Violation of: [for every node n in the doubly linked"
-                    + " list of nodes, except the one pointed to by"
-                    + " $this.preStart, n.previous.next = n]";
+            assert n.previous.next == n
+                    : "" + "Violation of: [for every node n in the doubly linked"
+                            + " list of nodes, except the one pointed to by"
+                            + " $this.preStart, n.previous.next = n]";
         }
         count++;
-        assert count == this.leftLength + this.rightLength + 2 : ""
-                + "Violation of: [$this.preStart points to the first node of"
-                + " a doubly linked list containing"
-                + " ($this.leftLength + $this.rightLength + 2) nodes]";
-        assert lastLeftFound : ""
-                + "Violation of: [$this.lastLeft points to the"
+        assert count == this.leftLength + this.rightLength + 2
+                : "" + "Violation of: [$this.preStart points to the first node of"
+                        + " a doubly linked list containing"
+                        + " ($this.leftLength + $this.rightLength + 2) nodes]";
+        assert lastLeftFound : "" + "Violation of: [$this.lastLeft points to the"
                 + " ($this.leftLength + 1)-th node in that doubly linked list]";
-        assert n == this.postFinish : ""
-                + "Violation of: [$this.postFinish points to the last"
-                + " node in that doubly linked list]";
+        assert n == this.postFinish
+                : "" + "Violation of: [$this.postFinish points to the last"
+                        + " node in that doubly linked list]";
 
         return true;
     }
@@ -175,9 +174,15 @@ public class List3<T> extends ListSecondary<T> {
      * Creator of initial representation.
      */
     private void createNewRep() {
+        this.preStart = new Node();
+        this.postFinish = new Node();
 
-        // TODO - fill in body
+        this.preStart.next = this.postFinish;
+        this.postFinish.next = null;
 
+        this.lastLeft = this.preStart;
+        this.leftLength = 0;
+        this.rightLength = 0;
     }
 
     /**
@@ -209,8 +214,8 @@ public class List3<T> extends ListSecondary<T> {
 
     @Override
     public final void transferFrom(List<T> source) {
-        assert source instanceof List3<?> : ""
-                + "Violation of: source is of dynamic type List3<?>";
+        assert source instanceof List3<?>
+                : "" + "Violation of: source is of dynamic type List3<?>";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type List3<?>, and
@@ -332,8 +337,7 @@ public class List3<T> extends ListSecondary<T> {
 
         @Override
         public void remove() {
-            throw new UnsupportedOperationException(
-                    "remove operation not supported");
+            throw new UnsupportedOperationException("remove operation not supported");
         }
 
     }
