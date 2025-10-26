@@ -46,8 +46,7 @@ public abstract class ListTest {
      * list = ([first leftLength entries in args], [remaining entries in args])
      * </pre>
      */
-    private void createFromArgsHelper(List<String> list, int leftLength,
-            String... args) {
+    private void createFromArgsHelper(List<String> list, int leftLength, String... args) {
         for (String s : args) {
             list.addRightFront(s);
             list.advance();
@@ -73,8 +72,7 @@ public abstract class ListTest {
      *   ([first leftLength entries in args], [remaining entries in args])
      * </pre>
      */
-    protected final List<String> createFromArgsTest(int leftLength,
-            String... args) {
+    protected final List<String> createFromArgsTest(int leftLength, String... args) {
         assert 0 <= leftLength : "Violation of: 0 <= leftLength";
         assert leftLength <= args.length : "Violation of: leftLength <= args.length";
         List<String> list = this.constructorTest();
@@ -97,8 +95,7 @@ public abstract class ListTest {
      *   ([first leftLength entries in args], [remaining entries in args])
      * </pre>
      */
-    protected final List<String> createFromArgsRef(int leftLength,
-            String... args) {
+    protected final List<String> createFromArgsRef(int leftLength, String... args) {
         assert 0 <= leftLength : "Violation of: 0 <= leftLength";
         assert leftLength <= args.length : "Violation of: leftLength <= args.length";
         List<String> list = this.constructorRef();
@@ -163,10 +160,9 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange",
-                "purple");
-        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange",
-                "purple", "red");
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "purple");
+        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange", "purple",
+                "red");
         /*
          * Call method under test
          */
@@ -182,10 +178,9 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange",
+        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange", "purple");
+        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange", "green",
                 "purple");
-        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange",
-                "green", "purple");
         /*
          * Call method under test
          */
@@ -237,10 +232,9 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange",
-                "purple", "red");
-        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange",
-                "purple");
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "purple",
+                "red");
+        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange", "purple");
         /*
          * Call method under test
          */
@@ -257,10 +251,9 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange",
-                "green", "purple");
-        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange",
+        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange", "green",
                 "purple");
+        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange", "purple");
         /*
          * Call method under test
          */
@@ -311,10 +304,10 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange",
-                "purple", "red");
-        List<String> list2 = this.createFromArgsRef(4, "yellow", "orange",
-                "purple", "red");
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "purple",
+                "red");
+        List<String> list2 = this.createFromArgsRef(4, "yellow", "orange", "purple",
+                "red");
         /*
          * Call method under test
          */
@@ -330,10 +323,10 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange",
-                "green", "purple");
-        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange",
-                "green", "purple");
+        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange", "green",
+                "purple");
+        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange", "green",
+                "purple");
         /*
          * Call method under test
          */
@@ -383,10 +376,8 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange",
-                "purple");
-        List<String> list2 = this.createFromArgsRef(0, "yellow", "orange",
-                "purple");
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "purple");
+        List<String> list2 = this.createFromArgsRef(0, "yellow", "orange", "purple");
         /*
          * Call method under test
          */
@@ -402,10 +393,10 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange",
-                "green", "purple");
-        List<String> list2 = this.createFromArgsRef(0, "yellow", "orange",
-                "green", "purple");
+        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange", "green",
+                "purple");
+        List<String> list2 = this.createFromArgsRef(0, "yellow", "orange", "green",
+                "purple");
         list1.moveToStart();
         /*
          * Assert that values of variables match expectations
@@ -454,10 +445,8 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange",
-                "purple");
-        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange",
-                "purple");
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "purple");
+        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange", "purple");
         /*
          * Call method under test
          */
@@ -474,10 +463,10 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange",
-                "green", "purple");
-        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange",
-                "green", "purple");
+        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange", "green",
+                "purple");
+        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange", "green",
+                "purple");
         /*
          * Call method under test
          */
@@ -530,10 +519,8 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange",
-                "purple");
-        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange",
-                "purple");
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "purple");
+        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange", "purple");
         /*
          * Call method under test
          */
@@ -550,10 +537,10 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange",
-                "green", "purple");
-        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange",
-                "green", "purple");
+        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange", "green",
+                "purple");
+        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange", "green",
+                "purple");
         /*
          * Call method under test
          */
@@ -639,13 +626,13 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "purple", "red",
-                "green", "blue", "yellow");
+        List<String> list1 = this.createFromArgsTest(2, "purple", "red", "green", "blue",
+                "yellow");
         List<String> list2 = this.createFromArgsRef(0);
-        List<String> list3 = this.createFromArgsRef(2, "purple", "red", "green",
-                "blue", "yellow");
-        List<String> list4 = this.createFromArgsRef(0, "yellow", "blue",
-                "green", "red", "purple");
+        List<String> list3 = this.createFromArgsRef(2, "purple", "red", "green", "blue",
+                "yellow");
+        List<String> list4 = this.createFromArgsRef(0, "yellow", "blue", "green", "red",
+                "purple");
         /*
          * Call method under test
          */
@@ -702,10 +689,8 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange",
-                "purple");
-        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange",
-                "purple");
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "purple");
+        List<String> list2 = this.createFromArgsRef(3, "yellow", "orange", "purple");
         /*
          * Call method under test
          */
@@ -721,10 +706,10 @@ public abstract class ListTest {
         /*
          * Set up variables
          */
-        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange",
-                "green", "purple");
-        List<String> list2 = this.createFromArgsRef(4, "yellow", "orange",
-                "green", "purple");
+        List<String> list1 = this.createFromArgsTest(2, "yellow", "orange", "green",
+                "purple");
+        List<String> list2 = this.createFromArgsRef(4, "yellow", "orange", "green",
+                "purple");
         /*
          * Call method under test
          */
@@ -753,6 +738,76 @@ public abstract class ListTest {
         assertEquals(list2, list1);
     }
 
-    // TODO - add test cases for retreat
+    @Test
+    public final void testRetreatRightEmptyLeftOne() {
+        /*
+         * Set up variables
+         */
+        List<String> list1 = this.createFromArgsTest(1, "red");
+        List<String> list2 = this.createFromArgsRef(0, "red");
+        /*
+         * Call method under test
+         */
+        list1.retreat();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(list2, list1);
+    }
+
+    @Test
+    public final void testRetreatRightEmptyLeftNonEmpty() {
+        /*
+         * Set up variables
+         */
+        List<String> list1 = this.createFromArgsTest(3, "green", "red", "blue");
+        List<String> list2 = this.createFromArgsRef(2, "green", "red", "blue");
+        /*
+         * Call method under test
+         */
+        list1.retreat();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(list2, list1);
+    }
+
+    @Test
+    public final void testRetreatRightNonEmptyLeftOne() {
+        /*
+         * Set up variables
+         */
+        List<String> list1 = this.createFromArgsTest(1, "yellow", "orange", "purple",
+                "red");
+        List<String> list2 = this.createFromArgsRef(0, "yellow", "orange", "purple",
+                "red");
+        /*
+         * Call method under test
+         */
+        list1.retreat();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(list2, list1);
+    }
+
+    @Test
+    public final void testRetreatRightNonEmptyLeftNonEmpty() {
+        /*
+         * Set up variables
+         */
+        List<String> list1 = this.createFromArgsTest(3, "yellow", "orange", "green",
+                "purple");
+        List<String> list2 = this.createFromArgsRef(2, "yellow", "orange", "green",
+                "purple");
+        /*
+         * Call method under test
+         */
+        list1.retreat();
+        /*
+         * Assert that values of variables match expectations
+         */
+        assertEquals(list2, list1);
+    }
 
 }
