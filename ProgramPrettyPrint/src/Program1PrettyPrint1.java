@@ -1,9 +1,11 @@
+import components.map.Map;
 import components.program.Program;
 import components.program.Program1;
 import components.simplereader.SimpleReader;
 import components.simplereader.SimpleReader1L;
 import components.simplewriter.SimpleWriter;
 import components.simplewriter.SimpleWriter1L;
+import components.statement.Statement;
 
 /**
  * Layered implementation of secondary method {@code prettyPrint} for
@@ -70,8 +72,40 @@ public final class Program1PrettyPrint1 extends Program1 {
         assert out != null : "Violation of: out is not null";
         assert out.isOpen() : "Violation of: out.is_open";
 
-        // TODO - fill in body
+        out.println("PROGRAM " + this.name() + " IS");
+        out.println();
 
+        Map<String, Statement> context = this.newContext();
+        Map<String, Statement> helper = this.newContext();
+
+        this.swapContext(context);
+        while (context.size() > 0) {
+            Map.Pair<String, Statement> instruction = context.removeAny();
+
+            // print the context instruction name
+            printSpaces(out, Program.INDENT_SIZE);
+            out.println("INSTRUCTION " + instruction.key() + " IS");
+
+            // print out the context statements
+            instruction.value().prettyPrint(out, Program.INDENT_SIZE * 2);
+
+            printSpaces(out, Program.INDENT_SIZE);
+            out.println("END " + instruction.key());
+            out.println();
+
+            helper.add(instruction.key(), instruction.value());
+        }
+
+        this.swapContext(helper);
+
+        out.println("BEGIN");
+
+        Statement body = this.newBody();
+        this.swapBody(body);
+        body.prettyPrint(out, Program.INDENT_SIZE);
+        this.swapBody(body);
+
+        out.println("END " + this.name());
     }
 
     /*
