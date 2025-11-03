@@ -85,10 +85,21 @@ public final class Tokenizer {
         assert 0 <= position : "Violation of: 0 <= position";
         assert position < text.length() : "Violation of: position < |text|";
 
-        // TODO - fill in body
+        String str = "";
 
-        // This line added just to make the program compilable.
-        return null;
+        if (SEPARATORS.contains(Character.toString(text.charAt(position)))) {
+            for (int i = position; i < text.length()
+                    && SEPARATORS.contains(Character.toString(text.charAt(i))); i++) {
+                str = str + text.charAt(i);
+            }
+        } else {
+            for (int i = position; i < text.length()
+                    && !SEPARATORS.contains(Character.toString(text.charAt(i))); i++) {
+                str = str + text.charAt(i);
+            }
+        }
+
+        return str;
     }
 
     /*
@@ -120,10 +131,6 @@ public final class Tokenizer {
         assert in != null : "Violation of: in is not null";
         assert in.isOpen() : "Violation of: in.is_open";
 
-        // TODO - fill in body
-
-        // This line added just to make the program compilable.
-        return null;
     }
 
     /*
