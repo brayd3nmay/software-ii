@@ -3,6 +3,7 @@ import static components.utilities.Tokenizer.isIdentifier;
 import static components.utilities.Tokenizer.isKeyword;
 
 import components.queue.Queue;
+import components.queue.Queue1L;
 import components.simplereader.SimpleReader;
 import components.simplereader.SimpleReader1L;
 import components.simplewriter.SimpleWriter;
@@ -131,6 +132,25 @@ public final class Tokenizer {
         assert in != null : "Violation of: in is not null";
         assert in.isOpen() : "Violation of: in.is_open";
 
+        Queue<String> tokens = new Queue1L<>();
+
+        String currentLine = "";
+        while (!in.atEOS()) {
+            currentLine = in.nextLine();
+
+            int position = 0;
+            while (position < currentLine.length()) {
+                String currentToken = nextWordOrSeparator(currentLine, position);
+
+                if (!currentToken.contains(" ")) {
+                    tokens.enqueue(currentToken);
+                }
+                position += currentToken.length();
+            }
+        }
+        tokens.enqueue(END_OF_INPUT);
+
+        return tokens;
     }
 
     /*
