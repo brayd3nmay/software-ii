@@ -166,26 +166,20 @@ public class Program2 extends ProgramSecondary {
         assert n != null : "Violation of: n is not null";
         assert Tokenizer.isIdentifier(n) : "" + "Violation of: n is a valid IDENTIFIER";
 
-        // TODO - fill in body
+        this.name = n;
 
     }
 
     @Override
     public final String name() {
 
-        // TODO - fill in body
-
-        // Fix this line to return the result.
-        return null;
+        return this.name;
     }
 
     @Override
     public final Map<String, Statement> newContext() {
 
-        // TODO - fill in body
-
-        // Fix this line to return the result.
-        return null;
+        return this.context.newInstance();
     }
 
     @Override
@@ -198,17 +192,17 @@ public class Program2 extends ProgramSecondary {
                         + " of primitive instructions in the BL language";
         assert allBlocks(c) : "Violation of: bodies in c" + " are all BLOCK statements";
 
-        // TODO - fill in body
+        Map<String, Statement> temp = this.context.newInstance();
 
+        temp.transferFrom(c);
+        c.transferFrom(this.context);
+        this.context.transferFrom(temp);
     }
 
     @Override
     public final Statement newBody() {
 
-        // TODO - fill in body
-
-        // Fix this line to return the result.
-        return null;
+        return this.body.newInstance();
     }
 
     @Override
@@ -217,8 +211,9 @@ public class Program2 extends ProgramSecondary {
         assert b instanceof Statement1 : "Violation of: b is a Statement1";
         assert b.kind() == Kind.BLOCK : "Violation of: b is a BLOCK statement";
 
-        // TODO - fill in body
-
+        Statement temp = this.body.newInstance();
+        temp.transferFrom(b);
+        b.transferFrom(this.body);
+        this.body.transferFrom(temp);
     }
-
 }
