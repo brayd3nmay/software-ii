@@ -2,6 +2,7 @@ import components.sequence.Sequence;
 import components.statement.Statement;
 import components.statement.StatementSecondary;
 import components.tree.Tree;
+import components.tree.Tree1;
 import components.utilities.Tokenizer;
 
 /**
@@ -11,7 +12,7 @@ import components.utilities.Tokenizer;
  * @convention [$this.rep is a valid representation of a Statement]
  * @correspondence this = $this.rep
  *
- * @author Put your name here
+ * @author Brayden May
  *
  */
 public class Statement2 extends StatementSecondary {
@@ -66,8 +67,8 @@ public class Statement2 extends StatementSecondary {
          * @ensures this = (k, c, ?)
          */
         private StatementLabel(Kind k, Condition c) {
-            assert k == Kind.IF || k == Kind.IF_ELSE || k == Kind.WHILE : ""
-                    + "Violation of: k = IF or k = IF_ELSE or k = WHILE";
+            assert k == Kind.IF || k == Kind.IF_ELSE || k == Kind.WHILE
+                    : "" + "Violation of: k = IF or k = IF_ELSE or k = WHILE";
             this.kind = k;
             this.condition = c;
         }
@@ -86,8 +87,7 @@ public class Statement2 extends StatementSecondary {
         private StatementLabel(Kind k, String i) {
             assert k == Kind.CALL : "Violation of: k = CALL";
             assert i != null : "Violation of: i is not null";
-            assert Tokenizer
-                    .isIdentifier(i) : "Violation of: i is an IDENTIFIER";
+            assert Tokenizer.isIdentifier(i) : "Violation of: i is an IDENTIFIER";
             this.kind = k;
             this.instruction = i;
         }
@@ -116,8 +116,12 @@ public class Statement2 extends StatementSecondary {
      */
     private void createNewRep() {
 
-        // TODO - fill in body
+        this.rep = new Tree1<>();
 
+        StatementLabel root = new StatementLabel(Kind.BLOCK);
+        Sequence<Tree<StatementLabel>> children = this.rep.newSequenceOfTree();
+
+        this.rep.assemble(root, children);
     }
 
     /*
@@ -154,8 +158,8 @@ public class Statement2 extends StatementSecondary {
     public final void transferFrom(Statement source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof Statement2 : ""
-                + "Violation of: source is of dynamic type Statement2";
+        assert source instanceof Statement2
+                : "" + "Violation of: source is of dynamic type Statement2";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type Statement2.
@@ -183,11 +187,11 @@ public class Statement2 extends StatementSecondary {
         assert s != null : "Violation of: s is not null";
         assert s != this : "Violation of: s is not this";
         assert s instanceof Statement2 : "Violation of: s is a Statement2";
-        assert this.kind() == Kind.BLOCK : ""
-                + "Violation of: [this is a BLOCK statement]";
+        assert this.kind() == Kind.BLOCK
+                : "" + "Violation of: [this is a BLOCK statement]";
         assert 0 <= pos : "Violation of: 0 <= pos";
-        assert pos <= this.lengthOfBlock() : ""
-                + "Violation of: pos <= [length of this BLOCK]";
+        assert pos <= this.lengthOfBlock()
+                : "" + "Violation of: pos <= [length of this BLOCK]";
         assert s.kind() != Kind.BLOCK : "Violation of: [s is not a BLOCK statement]";
 
         // TODO - fill in body
@@ -197,10 +201,10 @@ public class Statement2 extends StatementSecondary {
     @Override
     public final Statement removeFromBlock(int pos) {
         assert 0 <= pos : "Violation of: 0 <= pos";
-        assert pos < this.lengthOfBlock() : ""
-                + "Violation of: pos < [length of this BLOCK]";
-        assert this.kind() == Kind.BLOCK : ""
-                + "Violation of: [this is a BLOCK statement]";
+        assert pos < this.lengthOfBlock()
+                : "" + "Violation of: pos < [length of this BLOCK]";
+        assert this.kind() == Kind.BLOCK
+                : "" + "Violation of: [this is a BLOCK statement]";
         /*
          * The following call to Statement newInstance method is a violation of
          * the kernel purity rule. However, there is no way to avoid it and it
@@ -216,8 +220,8 @@ public class Statement2 extends StatementSecondary {
 
     @Override
     public final int lengthOfBlock() {
-        assert this.kind() == Kind.BLOCK : ""
-                + "Violation of: [this is a BLOCK statement]";
+        assert this.kind() == Kind.BLOCK
+                : "" + "Violation of: [this is a BLOCK statement]";
 
         // TODO - fill in body
 
@@ -231,8 +235,7 @@ public class Statement2 extends StatementSecondary {
         assert s != null : "Violation of: s is not null";
         assert s != this : "Violation of: s is not this";
         assert s instanceof Statement2 : "Violation of: s is a Statement2";
-        assert s.kind() == Kind.BLOCK : ""
-                + "Violation of: [s is a BLOCK statement]";
+        assert s.kind() == Kind.BLOCK : "" + "Violation of: [s is a BLOCK statement]";
         Statement2 localS = (Statement2) s;
         StatementLabel label = new StatementLabel(Kind.IF, c);
         Sequence<Tree<StatementLabel>> children = this.rep.newSequenceOfTree();
@@ -246,8 +249,7 @@ public class Statement2 extends StatementSecondary {
         assert s != null : "Violation of: s is not null";
         assert s != this : "Violation of: s is not this";
         assert s instanceof Statement2 : "Violation of: s is a Statement2";
-        assert this.kind() == Kind.IF : ""
-                + "Violation of: [this is an IF statement]";
+        assert this.kind() == Kind.IF : "" + "Violation of: [this is an IF statement]";
         Statement2 localS = (Statement2) s;
         Sequence<Tree<StatementLabel>> children = this.rep.newSequenceOfTree();
         StatementLabel label = this.rep.disassemble(children);
@@ -266,10 +268,8 @@ public class Statement2 extends StatementSecondary {
         assert s1 != s2 : "Violation of: s1 is not s2";
         assert s1 instanceof Statement2 : "Violation of: s1 is a Statement2";
         assert s2 instanceof Statement2 : "Violation of: s2 is a Statement2";
-        assert s1
-                .kind() == Kind.BLOCK : "Violation of: [s1 is a BLOCK statement]";
-        assert s2
-                .kind() == Kind.BLOCK : "Violation of: [s2 is a BLOCK statement]";
+        assert s1.kind() == Kind.BLOCK : "Violation of: [s1 is a BLOCK statement]";
+        assert s2.kind() == Kind.BLOCK : "Violation of: [s2 is a BLOCK statement]";
 
         // TODO - fill in body
 
@@ -284,8 +284,8 @@ public class Statement2 extends StatementSecondary {
         assert s1 != s2 : "Violation of: s1 is not s2";
         assert s1 instanceof Statement2 : "Violation of: s1 is a Statement2";
         assert s2 instanceof Statement2 : "Violation of: s2 is a Statement2";
-        assert this.kind() == Kind.IF_ELSE : ""
-                + "Violation of: [this is an IF_ELSE statement]";
+        assert this.kind() == Kind.IF_ELSE
+                : "" + "Violation of: [this is an IF_ELSE statement]";
 
         // TODO - fill in body
 
@@ -310,8 +310,8 @@ public class Statement2 extends StatementSecondary {
         assert s != null : "Violation of: s is not null";
         assert s != this : "Violation of: s is not this";
         assert s instanceof Statement2 : "Violation of: s is a Statement2";
-        assert this.kind() == Kind.WHILE : ""
-                + "Violation of: [this is a WHILE statement]";
+        assert this.kind() == Kind.WHILE
+                : "" + "Violation of: [this is a WHILE statement]";
 
         // TODO - fill in body
 
@@ -322,8 +322,8 @@ public class Statement2 extends StatementSecondary {
     @Override
     public final void assembleCall(String inst) {
         assert inst != null : "Violation of: inst is not null";
-        assert Tokenizer.isIdentifier(inst) : ""
-                + "Violation of: inst is a valid IDENTIFIER";
+        assert Tokenizer.isIdentifier(inst)
+                : "" + "Violation of: inst is a valid IDENTIFIER";
 
         // TODO - fill in body
 
@@ -331,8 +331,7 @@ public class Statement2 extends StatementSecondary {
 
     @Override
     public final String disassembleCall() {
-        assert this.kind() == Kind.CALL : ""
-                + "Violation of: [this is a CALL statement]";
+        assert this.kind() == Kind.CALL : "" + "Violation of: [this is a CALL statement]";
 
         // TODO - fill in body
 
