@@ -15,7 +15,7 @@ import components.utilities.Tokenizer;
  *             and [$this.body is a BLOCK statement]
  * @correspondence this = ($this.name, $this.context, $this.body)
  *
- * @author Put your name here
+ * @author Brayden May
  *
  */
 public class Program2 extends ProgramSecondary {
@@ -74,9 +74,8 @@ public class Program2 extends ProgramSecondary {
      * </pre>
      */
     private static boolean noPrimitiveInstructions(Map<String, Statement> c) {
-        return !c.hasKey("move") && !c.hasKey("turnleft")
-                && !c.hasKey("turnright") && !c.hasKey("infect")
-                && !c.hasKey("skip");
+        return !c.hasKey("move") && !c.hasKey("turnleft") && !c.hasKey("turnright")
+                && !c.hasKey("infect") && !c.hasKey("skip");
     }
 
     /**
@@ -106,10 +105,9 @@ public class Program2 extends ProgramSecondary {
      */
     private void createNewRep() {
 
-        // TODO - fill in body
-        // Make sure to use Statement1 from the library
-        // Use Map1L for the context if you want the asserts below to match
-
+        this.name = "Unnamed";
+        this.context = new Map1L<>();
+        this.body = new Statement1();
     }
 
     /*
@@ -146,8 +144,8 @@ public class Program2 extends ProgramSecondary {
     public final void transferFrom(Program source) {
         assert source != null : "Violation of: source is not null";
         assert source != this : "Violation of: source is not this";
-        assert source instanceof Program2 : ""
-                + "Violation of: source is of dynamic type Program2";
+        assert source instanceof Program2
+                : "" + "Violation of: source is of dynamic type Program2";
         /*
          * This cast cannot fail since the assert above would have stopped
          * execution in that case: source must be of dynamic type Program2.
@@ -166,8 +164,7 @@ public class Program2 extends ProgramSecondary {
     @Override
     public final void setName(String n) {
         assert n != null : "Violation of: n is not null";
-        assert Tokenizer.isIdentifier(n) : ""
-                + "Violation of: n is a valid IDENTIFIER";
+        assert Tokenizer.isIdentifier(n) : "" + "Violation of: n is a valid IDENTIFIER";
 
         // TODO - fill in body
 
@@ -195,13 +192,11 @@ public class Program2 extends ProgramSecondary {
     public final void swapContext(Map<String, Statement> c) {
         assert c != null : "Violation of: c is not null";
         assert c instanceof Map1L<?, ?> : "Violation of: c is a Map1L<?, ?>";
-        assert allIdentifiers(
-                c) : "Violation of: names in c are valid IDENTIFIERs";
-        assert noPrimitiveInstructions(c) : ""
-                + "Violation of: names in c do not match the names"
-                + " of primitive instructions in the BL language";
-        assert allBlocks(c) : "Violation of: bodies in c"
-                + " are all BLOCK statements";
+        assert allIdentifiers(c) : "Violation of: names in c are valid IDENTIFIERs";
+        assert noPrimitiveInstructions(c)
+                : "" + "Violation of: names in c do not match the names"
+                        + " of primitive instructions in the BL language";
+        assert allBlocks(c) : "Violation of: bodies in c" + " are all BLOCK statements";
 
         // TODO - fill in body
 
