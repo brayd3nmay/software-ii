@@ -125,10 +125,20 @@ public final class ExpressionEvaluator {
     private static int valueOfTerm(StringBuilder source) {
         assert source != null : "Violation of: source is not null";
 
-        // TODO - fill in body
+        int value = valueOfFactor(source);
+        while (source.charAt(0) == '*' || source.charAt(0) == '/') {
+            char operation = source.charAt(0);
+            source.deleteCharAt(0);
 
-        // This line added just to make the program compilable.
-        return 0;
+            int factor = valueOfFactor(source);
+            if (operation == '*') {
+                value *= factor;
+            } else {
+                value /= factor;
+            }
+        }
+
+        return value;
     }
 
     /**
