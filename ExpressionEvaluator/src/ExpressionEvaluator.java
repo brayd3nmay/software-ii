@@ -162,10 +162,20 @@ public final class ExpressionEvaluator {
     public static int valueOfExpr(StringBuilder source) {
         assert source != null : "Violation of: source is not null";
 
-        // TODO - fill in body
+        int value = valueOfTerm(source);
+        while (source.charAt(0) == '+' || source.charAt(0) == '-') {
+            char operation = source.charAt(0);
+            source.deleteCharAt(0);
 
-        // This line added just to make the program compilable.
-        return 0;
+            int term = valueOfTerm(source);
+            if (operation == '+') {
+                value += term;
+            } else {
+                value -= term;
+            }
+        }
+
+        return value;
     }
 
     /**
