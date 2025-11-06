@@ -39,16 +39,8 @@ public final class ExpressionEvaluator {
     private static int valueOfDigit(StringBuilder source) {
         assert source != null : "Violation of: source is not null";
 
-        int value = 0;
-        int i = 0;
-
-        while (i < source.length() && Character.isDigit(source.charAt(i))) {
-            value = value * 10 + Character.digit(source.charAt(i), RADIX);
-
-            i++;
-        }
-        source.delete(0, i);
-
+        int value = Character.digit(source.charAt(0), RADIX);
+        source.deleteCharAt(0);
         return value;
     }
 
@@ -72,10 +64,12 @@ public final class ExpressionEvaluator {
     private static int valueOfDigitSeq(StringBuilder source) {
         assert source != null : "Violation of: source is not null";
 
-        // TODO - fill in body
+        int value = 0;
+        while (source.length() > 0 && Character.isDigit(source.charAt(0))) {
+            value = value * 10 + valueOfDigit(source);
+        }
 
-        // This line added just to make the program compilable.
-        return 0;
+        return value;
     }
 
     /**
