@@ -93,10 +93,15 @@ public final class ExpressionEvaluator {
     private static int valueOfFactor(StringBuilder source) {
         assert source != null : "Violation of: source is not null";
 
-        // TODO - fill in body
-
-        // This line added just to make the program compilable.
-        return 0;
+        int value;
+        if (source.charAt(0) == '(') {
+            source.deleteCharAt(0);
+            value = valueOfExpr(source);
+            source.deleteCharAt(0);
+        } else {
+            value = valueOfDigitSeq(source);
+        }
+        return value;
     }
 
     /**
