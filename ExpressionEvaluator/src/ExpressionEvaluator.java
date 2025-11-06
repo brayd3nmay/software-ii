@@ -7,7 +7,7 @@ import components.simplewriter.SimpleWriter1L;
  * This program calculates the value of an expression consisting of numbers,
  * arithmetic operators, and parentheses.
  *
- * @author Put your name here
+ * @author Brayden May
  *
  */
 public final class ExpressionEvaluator {
@@ -39,10 +39,17 @@ public final class ExpressionEvaluator {
     private static int valueOfDigit(StringBuilder source) {
         assert source != null : "Violation of: source is not null";
 
-        // TODO - fill in body
+        int value = 0;
+        int i = 0;
 
-        // This line added just to make the program compilable.
-        return 0;
+        while (i < source.length() && Character.isDigit(source.charAt(i))) {
+            value = value * 10 + Character.digit(source.charAt(i), RADIX);
+
+            i++;
+        }
+        source.delete(0, i);
+
+        return value;
     }
 
     /**
@@ -168,10 +175,8 @@ public final class ExpressionEvaluator {
              * Parse and evaluate the expression after removing all white space
              * (spaces and tabs) from the user input.
              */
-            int value = valueOfExpr(
-                    new StringBuilder(source.replaceAll("[ \t]", "")));
-            out.println(
-                    source.substring(0, source.length() - 1) + " = " + value);
+            int value = valueOfExpr(new StringBuilder(source.replaceAll("[ \t]", "")));
+            out.println(source.substring(0, source.length() - 1) + " = " + value);
             out.print("Enter an expression followed by !: ");
             source = in.nextLine();
         }
